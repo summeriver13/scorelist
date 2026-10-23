@@ -1,30 +1,50 @@
 # 学生成绩管理系统
 
-## 实验指导书
+Java 17 实现的命令行成绩管理程序（课程实验三），按可测试的分层结构组织：记录不可变、规则在 `ScoreTable`、I/O 只在 `Cli`。
 
-### 一．实验题目
+## 功能
 
-实验三  学生成绩管理系统设计
+1. 查看全部成绩记录
+2. 添加记录（学生姓名、学号、课程、成绩）
+3. 按学号 + 课程修改成绩
+4. 按学号 + 课程删除记录
+5. 统计某课程的平均分、最高分、最低分
+6. 按学号查看某学生的全部成绩
+7. 按成绩从高到低输出
 
-### 二．实验目的
+## 运行
 
-本实验的目的是让学生：
+```bash
+mvn -q compile exec:java
+```
 
-1. 掌握java的类与对象的基本概念；
-2. 掌握简单的信息管理系统的设计与实现。
+## 测试
 
-### 三．实验要求
+```bash
+mvn -q test
+```
 
-1. 实现定义学生成绩记录，记录包括字段有：学生姓名、学号、课程名称、成绩。
-2. 实现查看学生成绩单功能，能显示所有学生成绩记录；
-3. 实现添加学生成绩记录功能，输入某位学生某门课的成绩，能保存到成绩表里面；
-4. 实现修改学生成绩记录功能，根据学生学号修改课程成绩；
-5. 实现删除学生成绩记录功能，根据学生学号删除课程成绩；
-6. 实现统计某门课平均分、最高分和最低分的功能；
-7. 实现查找某位学生成绩功能，根据学生学号显示该学生的成绩；
-8. 实现按成绩从高往低排序，并输出。
+## 结构
 
-## 参考项目
+```text
+src/main/java/scorelist/
+├── App.java         入口，装配 Cli
+├── Cli.java         菜单、输入校验、输出
+├── Score.java       不可变记录，构造时校验非空与 0-100
+├── ScoreTable.java  增删改查、统计、排序
+└── CourseStats.java 课程统计结果
+src/test/java/scorelist/
+├── ScoreTest.java
+├── ScoreTableTest.java
+└── CliTest.java
+```
 
-@ZenGx1n
-[student-score-manage](https://github.com/ZenGx1n/student-score-manage)
+## 约定
+
+- 成绩范围 0–100，非法输入在构造 `Score` 时即抛 `IllegalArgumentException`
+- 同一学生同一课程只有一条记录，重复添加抛 `IllegalStateException`
+- `ScoreTable` 不接触 `System.in`/`System.out`，因此可以直接单测
+
+## 参考
+
+课程实验三。早期版本参考 [ZenGx1n/student-score-manage](https://github.com/ZenGx1n/student-score-manage)。
