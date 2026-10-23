@@ -4,10 +4,9 @@ import java.util.Scanner;
 
 public final class App {
 
-    private App() {
-    }
+  private App() {}
 
-    public static void main(String[] args) {
-        new Cli(new Scanner(System.in), System.out).run();
-    }
+  public static void main(String[] args) {
+    new Cli(new Scanner(System.in), System.out).run();
+  }
 }

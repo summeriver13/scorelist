@@ -1,5 +1,7 @@
 # 学生成绩管理系统
 
+[![CI](https://github.com/summeriver13/Student-Score-Manage-System/actions/workflows/ci.yml/badge.svg)](https://github.com/summeriver13/Student-Score-Manage-System/actions/workflows/ci.yml)
+
 Java 17 实现的命令行成绩管理程序（课程实验三），按可测试的分层结构组织：记录不可变、规则在 `ScoreTable`、I/O 只在 `Cli`。
 
 ## 功能
@@ -14,19 +16,24 @@ Java 17 实现的命令行成绩管理程序（课程实验三），按可测试
 
 ## 运行
 
+需要 JDK 17+，Maven 由 wrapper 自动下载：
+
 ```bash
-mvn -q compile exec:java
+./mvnw -q compile exec:java      # Windows 用 mvnw.cmd
 ```
 
 ## 测试
 
 ```bash
-mvn -q test
+./mvnw -q test
 ```
 
 ## 结构
 
 ```text
+pom.xml
+mvnw / mvnw.cmd / .mvn/wrapper/    Maven wrapper，无需预装 Maven
+.github/workflows/ci.yml          push 与 PR 跑 verify
 src/main/java/scorelist/
 ├── App.java         入口，装配 Cli
 ├── Cli.java         菜单、输入校验、输出
@@ -44,6 +51,7 @@ src/test/java/scorelist/
 - 成绩范围 0–100，非法输入在构造 `Score` 时即抛 `IllegalArgumentException`
 - 同一学生同一课程只有一条记录，重复添加抛 `IllegalStateException`
 - `ScoreTable` 不接触 `System.in`/`System.out`，因此可以直接单测
+- 代码格式由 Spotless（google-java-format）在 `validate` 阶段检查，`./mvnw spotless:apply` 自动修复
 
 ## 参考
 
