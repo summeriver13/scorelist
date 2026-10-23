@@ -1,8 +1,8 @@
-# 学生成绩管理系统
+# scorelist
 
-[![CI](https://github.com/summeriver13/Student-Score-Manage-System/actions/workflows/ci.yml/badge.svg)](https://github.com/summeriver13/Student-Score-Manage-System/actions/workflows/ci.yml)
+[![CI](https://github.com/summeriver13/scorelist/actions/workflows/ci.yml/badge.svg)](https://github.com/summeriver13/scorelist/actions/workflows/ci.yml)
 
-Java 17 实现的命令行成绩管理程序（课程实验三），按可测试的分层结构组织：记录不可变、规则在 `ScoreTable`、I/O 只在 `Cli`。
+Java 17 实现的命令行学生成绩管理程序（课程实验三），按可测试的分层结构组织：记录不可变、规则在 `ScoreTable`、I/O 只在 `Cli`。
 
 ## 功能
 
